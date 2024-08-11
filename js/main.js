@@ -86,3 +86,28 @@ glacius.attack(monster);
 
 console.log(aurora.describe());
 console.log(glacius.describe());
+
+// 3-------------------------------------------------------------------
+// account list
+
+class Account{
+    constructor(owner){
+        this.owner = owner
+        this.balance = 0
+    }
+    credit(amount){
+        this.balance += amount
+    }
+    describe(){
+        console.log(`Owner: ${this.owner}, Balance: ${this.balance}`)
+    }
+}
+
+const sean = new Account('Sean')
+const brad = new Account('Brad')
+const georges = new Account('Georges')
+
+let arrOfAccounts = [sean, brad, georges]
+
+arrOfAccounts.forEach(el => el.credit(1000))
+arrOfAccounts.forEach(el => el.describe())
