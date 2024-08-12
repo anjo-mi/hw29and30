@@ -134,3 +134,5 @@ console.log(aged)
 console.log(`Júlia is ${aged.get('Júlia')}`)
 console.log(`is jacks age known`, aged.has('jack'))
 console.log(aged.has('toString'))
+
+// polymorphism-----------------------------------------------------
