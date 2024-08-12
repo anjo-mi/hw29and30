@@ -136,3 +136,47 @@ console.log(`is jacks age known`, aged.has('jack'))
 console.log(aged.has('toString'))
 
 // polymorphism-----------------------------------------------------
+
+Rabbit.prototype.toString = function(){
+    return `a ${this.type} rabbit`
+}
+
+console.log(String(killerRabbit))
+
+// getters, setters, static------------------------------------------
+
+let varyingSize = {
+    get size(){
+        return Math.floor(Math.random() * 100)
+    }
+}
+
+console.log(varyingSize.size)
+console.log(varyingSize.size)
+
+
+class Temperature{
+    constructor(celsius){
+        this.celsius = celsius
+    }
+    get fahrenheit(){
+        return this.celsius * (9/5) + 32
+    }
+    set fahrenheit(value){
+        this.celsius = (value - 32) / (9/5)
+    }
+    static fromFahreneheit(value){
+        return new Temperature((value - 32) / (9/5))
+    }
+}
+
+let temp = new Temperature(22)
+
+console.log(temp.celsius)
+console.log(temp.fahrenheit)
+
+temp.fahrenheit = 91
+console.log(temp.celsius)
+
+let boil = Temperature.fromFahreneheit(212)
+console.log(boil.celsius)
