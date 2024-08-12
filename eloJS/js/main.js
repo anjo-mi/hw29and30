@@ -63,3 +63,27 @@ console.log(obj.getWord())
 
 
 // private properties-----------------------------------------------
+
+class SecretSquirrel{
+    #getSecret(){
+        return 'im a giant fatty'
+    }
+    interrogate(){
+        let tooMuchTorture = this.#getSecret()
+        return 'never'
+    }
+}
+
+let moroccoMole = new SecretSquirrel()
+
+class RandomSource{
+    #max
+    constructor(max){
+        this.#max = max
+    }
+    getNum(){
+        return Math.floor(Math.random() * this.#max)
+    }
+}
+
+let seven = new RandomSource(7)
