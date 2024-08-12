@@ -100,3 +100,37 @@ console.log(killerRabbit.teeth)
 
 console.log(new Rabbit('basicBitch').teeth)
 console.log(Rabbit.prototype.teeth)
+
+console.log(Array.prototype.toString)
+console.log(Object.prototype.toString)
+console.log(Object.prototype.toString == Array.prototype.toString)
+
+
+console.log(Object.prototype.toString.call([1,2]))
+
+// Maps---------------------------------------------------------------
+
+let ages = {
+    Boris: 39,
+    Liang: 22,
+    Júlia: 62
+}
+
+console.log(`Júlia is ${ages['Júlia']}`)
+console.log(`is jacks age known?`, 'Jack' in ages)
+console.log(`is toString's age known?`, 'toString' in ages)
+// ???reason for using map??? ^^ get keys directly on obj, not prototype?
+
+console.log('toString' in Object.create(null))
+
+let aged = new Map()
+for (let key in ages){
+    aged.set(key, ages[key])
+}
+
+
+console.log(aged)
+
+console.log(`Júlia is ${aged.get('Júlia')}`)
+console.log(`is jacks age known`, aged.has('jack'))
+console.log(aged.has('toString'))
