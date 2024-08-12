@@ -43,6 +43,7 @@ blackRabbit.speak('you merely adopted the darkness, i was born in it')
 
 
 // classes-----------------------------------------------------------
+
 class Rabbit{
     constructor(type){
         this.type = type
@@ -87,3 +88,15 @@ class RandomSource{
 }
 
 let seven = new RandomSource(7)
+
+// override derived properties------------------------------------------
+
+Rabbit.prototype.teeth = 'small'
+console.log(killerRabbit.teeth)
+
+
+killerRabbit.teeth = 'wolf-like'
+console.log(killerRabbit.teeth)
+
+console.log(new Rabbit('basicBitch').teeth)
+console.log(Rabbit.prototype.teeth)
