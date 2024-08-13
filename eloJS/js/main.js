@@ -339,15 +339,44 @@
 
 // groups---------------------------------------------------------
 
+// class Group{
+//     constructor(){
+//         this.group = []
+//     }
+//     add(val){
+//         if (!this.has(val)){
+//             this.group.push(val)
+//         }
+//     }
+//     delete(val){
+//         let index = this.group.indexOf(val)
+//         if (index !== -1){
+//             this.group.splice(index,1)
+//         }
+//     }
+//     has(val){
+//         return this.group.includes(val)
+//     }
+//     static from(arr){
+//         const group = new Group()
+//         for (let val of arr){
+//             group.add(val)
+//         }
+//         return group
+//     }
+    
+// }
+
+
 class Group{
-    constructor(){
-        this.group = []
-    }
-    add(val){
-        if (!this.has(val)){
-            this.group.push(val)
+        constructor(){
+                this.group = []
+            }
+        add(val){
+            if (!this.has(val)){
+                this.group.push(val)
+            }
         }
-    }
     delete(val){
         let index = this.group.indexOf(val)
         if (index !== -1){
@@ -364,7 +393,6 @@ class Group{
         }
         return group
     }
-
 }
 
 
@@ -394,3 +422,6 @@ group.add(10);
 group.delete(10);
 console.log(group.has(10));
 // → false
+console.log(group.group)
+
+// iterable groups---------------------------------------------------
