@@ -260,7 +260,7 @@ class ListIterator{
 //     return new ListIterator(this)
 // }
 
-let newList = List.fromArray([1,2,3,4,5,6,7,8])
+let newList = List.fromArray([1,2,3,4,5,6,7,8,9])
 console.log(newList)
 for (let key of newList){
     console.log(key)
@@ -269,3 +269,23 @@ for (let key of newList){
 let array = [...newList]
 
 console.log(array)
+
+// inheritance----------------------------------------------------
+
+class LengthList extends List{
+    #length
+    constructor(value, rest){
+        super(value,rest)
+        this.#length = super.length
+    }
+    get length(){
+        return this.#length
+    }
+}
+
+console.log(LengthList.fromArray([2,2,3,4]))
+// LengthList {value : 2, rest: LengthList, #length: 4}
+
+
+// instanceOf operator------------------------------------------------
+
