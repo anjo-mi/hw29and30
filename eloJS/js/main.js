@@ -368,32 +368,7 @@
 // }
 
 
-class Group{
-        constructor(){
-                this.group = []
-            }
-        add(val){
-            if (!this.has(val)){
-                this.group.push(val)
-            }
-        }
-    delete(val){
-        let index = this.group.indexOf(val)
-        if (index !== -1){
-            this.group.splice(index,1)
-        }
-    }
-    has(val){
-        return this.group.includes(val)
-    }
-    static from(arr){
-        const group = new Group()
-        for (let val of arr){
-            group.add(val)
-        }
-        return group
-    }
-}
+
 
 
 //     constructor(value, rest){
@@ -412,16 +387,108 @@ class Group{
 
 
 
-let group = Group.from([10, 20]);
-console.log(group)
-console.log(group.has(10));
-// → true
-console.log(group.has(30));
-// → false
-group.add(10);
-group.delete(10);
-console.log(group.has(10));
-// → false
-console.log(group.group)
+// let group = Group.from([10, 20]);
+// console.log(group)
+// console.log(group.has(10));
+// // → true
+// console.log(group.has(30));
+// // → false
+// group.add(10);
+// group.delete(10);
+// console.log(group.has(10));
+// // → false
+// console.log(group.group)
 
 // iterable groups---------------------------------------------------
+
+class Group{
+    constructor(){
+            this.group = []
+        }
+    add(val){
+        if (!this.has(val)){
+            this.group.push(val)
+        }
+    }
+    delete(val){
+        let index = this.group.indexOf(val)
+        if (index !== -1){
+            this.group.splice(index,1)
+        }
+    }
+    has(val){
+        return this.group.includes(val)
+    }
+    static from(arr){
+        const group = new Group()
+        for (let val of arr){
+            group.add(val)
+        }
+        return group
+    }
+    [Symbol.iterator](){
+        return new GroupIterator(this)
+    }
+}
+
+class GroupIterator{
+    constructor(group){
+        this.group = group
+        this.index = 0
+    }
+    next(){
+        if (this.index >= this.group.group.length){
+            return {done: true}
+        }
+        let value = this.group.group[this.index]
+        this.index++
+        return {value, done: false}
+    }
+
+}
+
+for (let val of Group.from(["a", "b", "c"])) {
+    console.log(val);
+  }
+
+
+
+  // class List{
+//     constructor(value, rest){
+//         this.value = value
+//         this.rest = rest
+//     }
+//     get length(){
+//         return 1 + (this.rest ? this.rest.length : 0)
+//     }
+//     static fromArray(array){
+//         let result = null
+//         for (let i = array.length - 1; i >= 0 ; i--){
+//             result = new this(array[i], result)
+//         }
+//         return result
+//     }
+//     [Symbol.iterator](){
+//         return new ListIterator(this)
+//     }
+// }
+
+// class ListIterator{
+//     constructor(list){
+//         this.list = list
+//     }
+//     next(){
+//         if (this.list == null){
+//             return {done: true}
+//         }
+//         let value = this.list.value
+//         this.list = this.list.rest
+//         return {value, done: false}
+//     }
+// }
+
+// let newList = List.fromArray([1,2,3,4,5,6,7,8,9])
+// console.log(newList)
+// for (let key of newList){
+//     console.log(key)
+// }
