@@ -209,3 +209,32 @@ console.log(myTrip.length)
 
 // iterator interface-------------------------------------------------
 
+let okIterator = 'ok'[Symbol.iterator]()
+
+console.log(okIterator.next())
+console.log(okIterator.next())
+console.log(okIterator.next().done)
+
+
+
+class List{
+    constructor(value, rest){
+        this.value = value
+        this.rest = rest
+    }
+    get length(){
+        return 1 + (this.rest ? this.rest.length : 0)
+    }
+    static fromArray(array){
+        let result = null
+        for (let i = array.length - 1; i >= 0 ; i--){
+            result = new this(array[i], result)
+        }
+        return result
+    }
+}
+
+let myList = List.fromArray([1,2,3,4,5,6])
+
+console.log(myList)
+
