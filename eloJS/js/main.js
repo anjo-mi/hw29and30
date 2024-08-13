@@ -306,28 +306,91 @@
 
 
 // vector type------------------------------------------------------
-class Vec{
-    #length
-    constructor(x,y){
-        this.x = x
-        this.y = y
+// class Vec{
+//     #length
+//     constructor(x,y){
+//         this.x = x
+//         this.y = y
+//     }
+//     plus(vector){
+//         return new Vec(this.x + vector.x, this.y + vector.y)
+//     }
+//     minus(vector){
+//         return new Vec(this.x - vector.x, this.y - vector.y)
+//     }
+//     get length(){
+//         return Math.sqrt(this.x ** 2 + this.y ** 2)
+//     }
+// }
+
+
+
+// console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// // → Vec{x: 3, y: 5}
+// console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// // → Vec{x: -1, y: -1}
+// console.log(new Vec(3, 4).length);
+// // → 5
+
+
+
+
+
+
+// groups---------------------------------------------------------
+
+class Group{
+    constructor(){
+        this.group = []
     }
-    plus(vector){
-        return new Vec(this.x + vector.x, this.y + vector.y)
+    add(val){
+        if (!this.has(val)){
+            this.group.push(val)
+        }
     }
-    minus(vector){
-        return new Vec(this.x - vector.x, this.y - vector.y)
+    delete(val){
+        let index = this.group.indexOf(val)
+        if (index !== -1){
+            this.group.splice(index,1)
+        }
     }
-    get length(){
-        return Math.sqrt(this.x ** 2 + this.y ** 2)
+    has(val){
+        return this.group.includes(val)
     }
+    static from(arr){
+        const group = new Group()
+        for (let val of arr){
+            group.add(val)
+        }
+        return group
+    }
+
 }
 
 
+//     constructor(value, rest){
+//         this.value = value
+//         this.rest = rest
+//     }
 
-console.log(new Vec(1, 2).plus(new Vec(2, 3)));
-// → Vec{x: 3, y: 5}
-console.log(new Vec(1, 2).minus(new Vec(2, 3)));
-// → Vec{x: -1, y: -1}
-console.log(new Vec(3, 4).length);
-// → 5
+//     static fromArray(array){
+//         let result = null
+//         for (let i = array.length - 1; i >= 0 ; i--){
+//             result = new this(array[i], result)
+//         }
+//         return result
+//     }
+
+
+
+
+let group = Group.from([10, 20]);
+console.log(group)
+console.log(group.has(10));
+// → true
+console.log(group.has(30));
+// → false
+group.add(10);
+group.delete(10);
+console.log(group.has(10));
+// → false
