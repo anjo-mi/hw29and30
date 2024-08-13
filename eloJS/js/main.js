@@ -180,3 +180,32 @@ console.log(temp.celsius)
 
 let boil = Temperature.fromFahreneheit(212)
 console.log(boil.celsius)
+
+// symbols-------------------------------------------------------
+
+let sym = Symbol('name')
+
+console.log(sym == Symbol('name'))
+
+
+Rabbit.prototype[sym] = 55
+console.log(killerRabbit[sym])
+
+const length = Symbol('length')
+Array.prototype[length] = 0
+
+console.log([1,2].length)
+console.log([1,2][length])
+
+let myTrip = {
+    length: 2,
+    0: 'uganda',
+    1: 'bahama',
+    [length]: 'a lot of miles'
+}
+
+console.log(myTrip[length])
+console.log(myTrip.length)
+
+// iterator interface-------------------------------------------------
+
