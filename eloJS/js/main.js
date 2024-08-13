@@ -218,74 +218,116 @@
 
 
 
-class List{
-    constructor(value, rest){
-        this.value = value
-        this.rest = rest
-    }
-    get length(){
-        return 1 + (this.rest ? this.rest.length : 0)
-    }
-    static fromArray(array){
-        let result = null
-        for (let i = array.length - 1; i >= 0 ; i--){
-            result = new this(array[i], result)
-        }
-        return result
-    }
-    [Symbol.iterator](){
-        return new ListIterator(this)
-    }
-}
-
-let myList = List.fromArray([1,2,3,4,5,6])
-
-console.log(myList)
-
-class ListIterator{
-    constructor(list){
-        this.list = list
-    }
-    next(){
-        if (this.list == null){
-            return {done: true}
-        }
-        let value = this.list.value
-        this.list = this.list.rest
-        return {value, done: false}
-    }
-}
-
-// List.prototype[Symbol.iterator] = function(){
-//     return new ListIterator(this)
+// class List{
+//     constructor(value, rest){
+//         this.value = value
+//         this.rest = rest
+//     }
+//     get length(){
+//         return 1 + (this.rest ? this.rest.length : 0)
+//     }
+//     static fromArray(array){
+//         let result = null
+//         for (let i = array.length - 1; i >= 0 ; i--){
+//             result = new this(array[i], result)
+//         }
+//         return result
+//     }
+//     [Symbol.iterator](){
+//         return new ListIterator(this)
+//     }
 // }
 
-let newList = List.fromArray([1,2,3,4,5,6,7,8,9])
-console.log(newList)
-for (let key of newList){
-    console.log(key)
-}
+// let myList = List.fromArray([1,2,3,4,5,6])
 
-let array = [...newList]
+// console.log(myList)
 
-console.log(array)
+// class ListIterator{
+//     constructor(list){
+//         this.list = list
+//     }
+//     next(){
+//         if (this.list == null){
+//             return {done: true}
+//         }
+//         let value = this.list.value
+//         this.list = this.list.rest
+//         return {value, done: false}
+//     }
+// }
 
-// inheritance----------------------------------------------------
+// // List.prototype[Symbol.iterator] = function(){
+// //     return new ListIterator(this)
+// // }
 
-class LengthList extends List{
+// let newList = List.fromArray([1,2,3,4,5,6,7,8,9])
+// console.log(newList)
+// for (let key of newList){
+//     console.log(key)
+// }
+
+// let array = [...newList]
+
+// console.log(array)
+
+// // inheritance----------------------------------------------------
+
+// class LengthList extends List{
+//     #length
+//     constructor(value, rest){
+//         super(value,rest)
+//         this.#length = super.length
+//     }
+//     get length(){
+//         return this.#length
+//     }
+// }
+
+// console.log(LengthList.fromArray([2,2,3,4]))
+// // LengthList {value : 2, rest: LengthList, #length: 4}
+
+
+// // instanceOf operator------------------------------------------------
+
+// console.log(new LengthList(1,null) instanceof LengthList)
+
+// console.log(new LengthList(2,null) instanceof List)
+
+// console.log(new List(3,null) instanceof LengthList
+// )
+// console.log([1] instanceof Array)
+
+// console.log(List.fromArray([1,2,3,4]) instanceof ListIterator)
+
+
+// ___________________________EXERCISES_______________________________
+
+
+
+
+// vector type------------------------------------------------------
+class Vec{
     #length
-    constructor(value, rest){
-        super(value,rest)
-        this.#length = super.length
+    constructor(x,y){
+        this.x = x
+        this.y = y
+    }
+    plus(vector){
+        return new Vec(this.x + vector.x, this.y + vector.y)
+    }
+    minus(vector){
+        return new Vec(this.x - vector.x, this.y - vector.y)
     }
     get length(){
-        return this.#length
+        return Math.sqrt(this.x ** 2 + this.y ** 2)
     }
 }
 
-console.log(LengthList.fromArray([2,2,3,4]))
-// LengthList {value : 2, rest: LengthList, #length: 4}
 
 
-// instanceOf operator------------------------------------------------
-
+console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// → Vec{x: 3, y: 5}
+console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// → Vec{x: -1, y: -1}
+console.log(new Vec(3, 4).length);
+// → 5
